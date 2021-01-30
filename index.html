@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--Header and Menu Section-->
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Booking Section-->
+    <main id="modal" class="main-content container">
+           
+                    <div class="booking-form">
+                            <h2 class="h-color">Booking Flights</h2>
+                            <div class="input-group">
+                                <label for="" class="color-set">Flying From</label>
+                                <input required class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
+                            </div>
+                            <div class="input-group">
+                                <label for="" class="color-set">Flying To</label>
+                                <input required class="inp-style" type="text" name="" placeholder="New York, United States">
+                            </div>
+                            <div class="inputs">
+                                <div class="input-group">
+                                    <label" for="" class="color-set">Departure</label>
+                                    <input class="inp-style" type="date" name="">
+                                </div>
+                                <div class="input-group">
+                                    <label for="" class="color-set">Return</label>
+                                    <input class="inp-style" type="date" name="">
+                                </div>
+                            </div>
+                            <div class="input-group f-class">
+                                <div>
+                                    
+                    <!-------------------------------First Class ticket control is here ----------------------->
+
+                                    <label for="" class="color-set">First Class ($150)</label>
+                                    <input id="ticket1-count" value="0" class="inp-style inp-width" type="number" name="">
+                                </div>
+                            
+
+                                <div class="plus-minus-btn">
+                                    <button onclick="controlTicketCounting('ticket1', true)" class="counting-btn" >+</button>
+                                    <button onclick="controlTicketCounting('ticket1', false)" class="counting-btn" >-</button>
+                                </div>
+                            </div>
+                            
+                            <div class="input-group f-class">
+                                <div>
+
+
+                                    <!-------------------------------Economy ticket control is here ----------------------->
+
+                                    <label for="" class="color-set">Economy ($100)</label>
+                                    <input id="ticket2-count" class="inp-style inp-width" value="0" type="number" name="">
+                                </div>
+                            
+
+                                <div class="plus-minus-btn">
+                                    <button onclick="controlTicketCounting('ticket2', true)" class="counting-btn"  type="submit">+</button><button onclick="controlTicketCounting('ticket2', false)" class="counting-btn" >-</button>
+                                </div>
+                            </div>
+                            <div class="calculations">
+                                <div class="amount">
+                                    <div class="left">
+                                        <p class="color-set p-bold ">Subtotal</p>
+                                    </div>
+                                    <div class="right">
+                                        <p class="color-set2" id="total-price">$0</p>
+                                    </div>
+                                </div>
+
+                                <div class="amount">
+                                    <div class="left">
+                                        <p class="color-set p-bold ">Charge 10% VAT</p>
+                                    </div>
+                                    <div class="right">
+                                        <p class="color-set2" id= 'vat-charge'>$0</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="amount">
+                                    <div class="left">
+                                        <h4 class="color-set p-bold p-size">Total</h3>
+                                    </div>
+                                    <div class="right">
+                                        <p id="ticket-price" class="color-set2 item-bold">$0</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-style" id="submitBtn">Book Now</button>
+                        </div>
+            
+                        <div class="booking-content">
+                            <h1>discover <br> around the world</h1>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise voluptatibus quam</p>
+                        </div>
+     </main>    
+     <div class="modal" id="aleart-box">
+         <div class="circle">
+             <i class="fa fa-check" aria-hidden="true"></i>
+         </div> <br><br>
+         <h1 class="txt1">thank you dear your order almost done.</h1><br>
+         
+         <h2 class="cost">Your Toatal cost is</h2>
+         <h1  class="txt2" id="ticket-price2">$0</h1>
+         
+        <button class="come-back" id="come-back">OK</button>
+    </div>
+
+<script>
+
+function controlTicketCounting(ticket, isIncrease){
+                const ticketInput = document.getElementById(ticket + '-count');
+                const ticketCounting = parseFloat(ticketInput.value);
+                // const ticketAddCount  = ticketCounting + 1;
+                let ticketAddCount = ticketCounting;
+                if(isIncrease == true){
+                    ticketAddCount  = ticketCounting + 1;
+                }
+                if(isIncrease == false && ticketCounting > 0){
+                    ticketAddCount  = ticketCounting - 1;
+                }
+                ticketInput.value = ticketAddCount;
+                // const totalTicket = ticketAddCount * 150;
+                let totalTicket = 0;
+                if(ticket == 'ticket1'){
+                    const totalTicket = ticketAddCount * 150;
+                }
+                if(ticket == 'ticket2'){
+                    const totalTicket = ticketAddCount * 100;
+                }
+                
+                calculateTicket()
+           }
+            function calculateTicket(){
+                const ticket1Count = ticketInputValue('ticket1');
+                const ticket2Count = ticketInputValue('ticket2');
+                const totalPrice = ticket1Count * 150 + ticket2Count * 100;
+
+                document.getElementById('total-price').innerText = '$' + totalPrice;
+
+                const vat = totalPrice * 0.1;
+                document.getElementById('vat-charge').innerText = '$' + vat;
+
+                const totalAmount  =  totalPrice + vat;
+                document.getElementById('ticket-price').innerText = '$' + totalAmount;
+                const totalAmount2  =  totalPrice + vat;
+                document.getElementById('ticket-price2').innerText = '$' + totalAmount2;
+            }
+            function ticketInputValue(ticket){
+                const ticketInput = document.getElementById(ticket + '-count');
+                const ticketCount = parseInt(ticketInput.value);
+                return ticketCount;
+            }
+
+            //////////////////////// there is popup area////////////////////////
+
+
+            document.getElementById('submitBtn').addEventListener('click', function(){
+                 const aleartBox =  document.getElementById('modal');
+                 aleartBox.style.display = 'none';
+            })
+
+            document.getElementById('submitBtn').addEventListener('click', function(){
+                 const aleartBox =  document.getElementById('aleart-box');
+                 aleartBox.style.display = 'block';
+            })
+
+            document.getElementById('come-back').addEventListener('click', function(){
+                 const aleartBox =  document.getElementById('modal');
+                 aleartBox.style.display = 'block';
+            })
+
+            document.getElementById('come-back').addEventListener('click', function(){
+                 const aleartBox =  document.getElementById('aleart-box');
+                 aleartBox.style.display = 'none';
+            })
+
+       </script>
+
+</body>
+
+</html>
